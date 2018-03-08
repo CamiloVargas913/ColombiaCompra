@@ -20,7 +20,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Colombia Compra</a>
+    <a class="navbar-brand " href="index.html">Colombia Compra  <li class="fa fa-flag-o"> </li> </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -61,14 +61,14 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">  Compra productos</a>
+              <a href="{{ 'compras' }}">  Compra productos</a>
             </li>
             <!--<li>
               <a href="cards.html">Busqueda</a>
             </li>-->
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+        <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Example Pages</span>
@@ -87,7 +87,7 @@
               <a href="blank.html">Blank Page</a>
             </li>
           </ul>
-        </li>
+        </li>-->
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -99,7 +99,7 @@
       <ul class="navbar-nav ml-auto">        
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            <i class="fa fa-hashtag"></i> Udec Coding</a>
         </li>
       </ul>
     </div>

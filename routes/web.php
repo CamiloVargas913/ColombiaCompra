@@ -26,3 +26,6 @@ Route::get('/clase', function () {
 Route::get('/tipo', function () {
     return view('Busqueda/tipo');
 });
+Route::get('/compras', function () {
+    return view('Compras/compras');
+});
