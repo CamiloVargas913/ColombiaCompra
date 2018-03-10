@@ -5,47 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \SplFixedArray;
 
-class comprasMatrizController extends Controller
-{
-    public function compras(Request $request){
-    	$code1=$request->input('producto1');
-    	$code2=$request->input('producto2');
-    	$code3=$request->input('producto3');
-    	$code4=$request->input('producto4');
-    	$code5=$request->input('producto5');
-    	$code6=$request->input('producto6');
-    	$code7=$request->input('producto7');
-    	$code8=$request->input('producto8');
-    	$code9=$request->input('producto9');
-    	$code10=$request->input('producto10');
-    	$valor=$request->input('valorcontrato');
-    	$nombrecomprador=$request->input('nombrecomprador');
-    	$apellido=$request->input('Apellido');
-    	$cedula=$request->input('cedula');
-    	$contrato=$request->input('contrato');
-    	$descripcion=$request->input('descripcion');
-    	$valorcontrato=$request->input('valorcontrato');
+class crearMatrizController extends Controller{
 
-    	$comprador=new SplFixedArray();
-    	$comprador=[];
-    	$comprador=[
-            "Nombre"=>$nombrecomprador, 
-            "Apellido"=>$apellido, 
-            "Cedula"=>$cedula, 
-            "IDContrato"=>$contrato, 
-            "Descripcion"=>$descripcion, 
-            "ValorContrato"=>$valorcontrato
-        ];
-    	$usuario2=new SplFixedArray();
-    	$usuario2=[];
+    public function matriz(){
         $codigos=new SplFixedArray();
         $codigos=[];
-        $datos=new SplFixedArray();
-        $datos=[];
-        $datos2=new SplFixedArray();
-        $datos2=[];
-        $cont=0;
-    	$codigos[]=["Codigo"=>30101500, "Nombre"=>"Ángulos","valor"=>15000, "clase"=>"A", "tipo"=>3];
+       $codigos[]=["Codigo"=>30101500, "Nombre"=>"Ángulos","valor"=>15000, "clase"=>"A", "tipo"=>3];
         $codigos[]=["Codigo"=>30101501, "Nombre"=>"Ángulos de aleación ferrosa","valor"=>15000, "clase"=>"A", "tipo"=>3];
         $codigos[]=["Codigo"=>30101502, "Nombre"=>"Ángulos de aleación no ferrosa","valor"=>15000, "clase"=>"A", "tipo"=>3];
         $codigos[]=["Codigo"=>30101503, "Nombre"=>"Ángulos de hierro","valor"=>15000, "clase"=>"A", "tipo"=>3];
@@ -587,8 +552,98 @@ class comprasMatrizController extends Controller
         $codigos[]=["Codigo"=>30172111, "Nombre"=>"Operador completo de puerta de garaje","valor"=>5000, "clase"=>"C", "tipo"=>1];
         $codigos[]=["Codigo"=>30172112, "Nombre"=>"Componente de operador de puerta de garaje"];
         $codigos[]=["Codigo"=>30172113, "Nombre"=>"Accesorio de operador de puerta de garaje"];
+        return $codigos;
+    }
+
+    public function llenarmatriz(Request $request){ 
+        $codigos=$this->matriz();
+        $code=$request->input('codigo');
+        $nombre=$request->input('nombre');
+        $valor=$request->input('valor');
+        $clase=$request->input('clase');
+        $tipo=$request->input('tipo');
+        $datos=new SplFixedArray();
+        $datos=[];
+        $datos2=new SplFixedArray();
+        $datos2=[];
+        $nombre=ucwords($nombre);
+        $valor=ucwords($valor);
+        $clase=ucwords($clase);
+        $tipo=ucwords($tipo);
         
+        $ban=false;
+
+        foreach ($codigos as $index => $codigo) {
+            foreach ($codigo as $key => $value) {
+                if ($value==$code || $value==$nombre || $value==$valor || $value==$clase || $value==$tipo) {
+                    $ban=true;
+                    $datos[]=[
+                    "Codigo"=>$codigo['Codigo'],
+                    "Nombre"=>$codigo['Nombre'],
+                    "Valor"=>$codigo['valor'],
+                    "Clase"=>$codigo['clase'],
+                    "Tipo"=>$codigo['tipo'],
+                    ];
+                }
+            }               
+        }
+       if ($ban) {
+           $datos2=[
+            'archivos'=>$datos
+        ];
+        return view('table',$datos2);
+       }else{
+            return view('Alertas/error');
+       }
+       
         
+    }
+
+    public function matrizCompleta(Request $request){
+        $codigos=$this->matriz();
+        $full2=new SplFixedArray();
+        $full2=[];
+         $full2=[
+            'todos'=>$codigos
+        ];
+        return view('todos',$full2);   
+    }
+     public function compras(Request $request){
+        $code1=$request->input('producto1');
+        $code2=$request->input('producto2');
+        $code3=$request->input('producto3');
+        $code4=$request->input('producto4');
+        $code5=$request->input('producto5');
+        $code6=$request->input('producto6');
+        $code7=$request->input('producto7');
+        $code8=$request->input('producto8');
+        $code9=$request->input('producto9');
+        $code10=$request->input('producto10');
+        $valor=$request->input('valorcontrato');
+        $nombrecomprador=$request->input('nombrecomprador');
+        $apellido=$request->input('Apellido');
+        $cedula=$request->input('cedula');
+        $contrato=$request->input('contrato');
+        $descripcion=$request->input('descripcion');
+        $valorcontrato=$request->input('valorcontrato');
+        $codigos=$this->matriz();
+        $comprador=new SplFixedArray();
+        $comprador=[];
+        $comprador=[
+            "Nombre"=>$nombrecomprador, 
+            "Apellido"=>$apellido, 
+            "Cedula"=>$cedula, 
+            "IDContrato"=>$contrato, 
+            "Descripcion"=>$descripcion, 
+            "ValorContrato"=>$valorcontrato
+        ];
+        $usuario2=new SplFixedArray();
+        $usuario2=[];
+        $datos=new SplFixedArray();
+        $datos=[];
+        $datos2=new SplFixedArray();
+        $datos2=[];
+        $cont=0;
         foreach ($codigos as $index => $codigo) {    
             foreach ($codigo as $key => $value) {
                 if ($value==$code1) {
@@ -694,42 +749,29 @@ class comprasMatrizController extends Controller
             }               
         }
 
-		foreach ($comprador as $key => $value) {
-			$usuario=[
-				"Nombre"=>$comprador['Nombre'],
-				"Apellido"=>$comprador['Apellido'],
-				"Cedula"=>$comprador['Cedula'],
-				"N° Contrato"=>$comprador['IDContrato'],
-				"Descripcion"=>$comprador['Descripcion'],
-				"Valor Contrato"=>$comprador['ValorContrato'],
-				
-			];
-		}
+        foreach ($comprador as $key => $value) {
+            $usuario=[
+                "Nombre"=>$comprador['Nombre'],
+                "Apellido"=>$comprador['Apellido'],
+                "Cedula"=>$comprador['Cedula'],
+                "N° Contrato"=>$comprador['IDContrato'],
+                "Descripcion"=>$comprador['Descripcion'],
+                "Valor Contrato"=>$comprador['ValorContrato'],
+                
+            ];
+        }
         
         if ($valor<$cont) {
-        	return view('Alertas/alerta');
+            return view('Alertas/alerta');
         }else if ($valor>=$cont) {
-        	$usuario2=[
-            	'users'=>$usuario
-        	];
-        	$datos2=[
-            	'codigos'=>$datos
+            $usuario2=[
+                'users'=>$usuario
+            ];
+            $datos2=[
+                'codigos'=>$datos
             
-        	];
-        	return view('tablecompra',$usuario2,$datos2);
+            ];
+            return view('tablecompra',$usuario2,$datos2);
         }
-
-        echo "<br><br>";
-       
-
-
-
-
-
-        //echo $totalcosto;
-        /*$datos2=[
-            'archivos'=>$datos
-        ];
-        return view('table',$datos2);*/
     }
 }
