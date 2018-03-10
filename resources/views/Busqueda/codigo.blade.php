@@ -19,4 +19,9 @@
         <button type="submit" class="btn btn-primary">Buscar</button>
       </form>
     </div>
+    <div> 
+    @yield('contrnido2')
+    </div>
+
+    
 @stop

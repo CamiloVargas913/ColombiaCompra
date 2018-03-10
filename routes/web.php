@@ -29,3 +29,11 @@ Route::get('/tipo', function () {
 Route::get('/compras', function () {
     return view('Compras/compras');
 });
+
+
+
+
+
+Route::get('productos','crearMatrizController@matrizCompleta');
+Route::post('formulario','crearMatrizController@llenarmatriz');
+Route::post('formulariocompras','comprasMatrizController@compras');

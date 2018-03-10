@@ -15,8 +15,13 @@
     <form action="{{url('formulario')}}" method="POST">
       {{csrf_field()}}
       <div class="form-group ">
-       <input type="text"  class="form-control" placeholder="Ingrese Clase"  name="clase">
-      </div>
+          <select  class="form-control" placeholder="Ingrese Tipo"  name="tipo">
+            <option value=" ">Selecione una Clase</option>
+            <option value="A">Clase A</option>
+            <option value="B">Clase B</option>
+            <option value="C">Clase C</option>
+          </select>
+        </div>
       <button type="submit" class="btn btn-primary">Buscar</button>
      </form>
     </div>
