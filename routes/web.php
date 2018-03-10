@@ -36,4 +36,4 @@ Route::get('/compras', function () {
 
 Route::get('productos','crearMatrizController@matrizCompleta');
 Route::post('formulario','crearMatrizController@llenarmatriz');
-Route::post('formulariocompras','comprasMatrizController@compras');
+Route::post('formulariocompras','crearMatrizController@compras');
